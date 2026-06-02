@@ -46,7 +46,18 @@ MONGO_URI = os.environ.get("MONGO_URI")
 if not MONGO_URI:
     raise ValueError("MONGO_URI environment variable is not set")
 
-client = MongoClient(MONGO_URI)
+client = MongoClient(
+    MONGO_URI,
+    serverSelectionTimeoutMS=5000
+)
+
+try:
+    client.admin.command("ping")
+    print("MongoDB connected")
+except Exception as e:
+    print(" MongoDB connection failed:", e)
+    raise
+
 db = client["user_auth_db"]
 users_collection = db["users"]
 
