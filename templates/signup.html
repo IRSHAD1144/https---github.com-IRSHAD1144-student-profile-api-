@@ -132,112 +132,174 @@
     </div>
 
     <script>
-      let pendingUsername = null;
+  let pendingUsername = null;
 
-      async function startSignup() {
-        document
-          .querySelectorAll(".error")
-          .forEach((el) => (el.textContent = ""));
-        document.getElementById("message").textContent = "";
+  async function startSignup() {
+    document.querySelectorAll(".error").forEach(el => {
+      el.textContent = "";
+    });
 
-        const username = document.getElementById("username").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const dateofbirth = document.getElementById("dateofbirth").value;
+    const message = document.getElementById("message");
+    message.textContent = "";
 
-        let valid = true;
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const dateofbirth = document.getElementById("dateofbirth").value;
+    const phone = document.getElementById("phone").value.trim();
 
-        if (!username) {
-          document.getElementById("userError").textContent =
-            "Username required";
-          valid = false;
-        }
-        if (!email) {
-          document.getElementById("emailError").textContent = "Email required";
-          valid = false;
-        }
-        if (!password) {
-          document.getElementById("passError").textContent =
-            "Password required";
-          valid = false;
-        }
-        if (!dateofbirth) {
-          document.getElementById("dobError").textContent =
-            "Date of birth required";
-          valid = false;
-        }
-        if (!valid) return;
+    let valid = true;
 
-        try {
-          const phone = document.getElementById("phone").value.trim();
-          const response = await fetch("/api/signup/start", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              username,
-              email,
-              password,
-              dateofbirth,
-              phone,
-            }),
-          });
-          const data = await response.json();
-          if (response.ok) {
-            pendingUsername = username;
-            document.getElementById("message").style.color = "green";
-           
-            if (data.otp) {
-              document.getElementById("message").innerHTML =
-                `OTP : <strong style="font-size: 1.2rem; color: #e74c3c;">${data.otp}</strong><br><small>Enter this code below:</small>`;
-            } else {
-              document.getElementById("message").textContent =
-                "OTP sent to your email.";
-            }
-           
-            document.getElementById("otpSection").style.display = "block";
-            document.getElementById("startBtn").disabled = true;
-          } else {
-            document.getElementById("message").style.color = "red";
-            document.getElementById("message").textContent = data.message;
-          }
-        } catch (err) {
-          document.getElementById("message").style.color = "red";
-          document.getElementById("message").textContent =
-            "Server error. Please try again.";
-        }
+    if (!username) {
+      document.getElementById("userError").textContent =
+        "Username required";
+      valid = false;
+    }
+
+    if (!email) {
+      document.getElementById("emailError").textContent =
+        "Email required";
+      valid = false;
+    }
+
+    if (!password) {
+      document.getElementById("passError").textContent =
+        "Password required";
+      valid = false;
+    }
+
+    if (!dateofbirth) {
+      document.getElementById("dobError").textContent =
+        "Date of birth required";
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    try {
+      const response = await fetch("/api/signup/start", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          dateofbirth,
+          phone
+        })
+      });
+
+      const data = await response.json();
+
+      console.log("Signup Start Response:", data);
+
+      if (!response.ok) {
+        message.style.color = "red";
+        message.textContent =
+          data.message || "Signup failed";
+        return;
       }
 
-      async function verifyOtp() {
-        document.getElementById("otpError").textContent = "";
-        const otp = document.getElementById("otpInput").value.trim();
-        if (!otp) {
-          document.getElementById("otpError").textContent = "OTP required";
-          return;
-        }
-        try {
-          const response = await fetch("/api/signup/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username: pendingUsername, otp }),
-          });
-          const data = await response.json();
-          if (response.ok) {
-            document.getElementById("message").style.color = "green";
-            document.getElementById("message").textContent =
-              "Signup complete! Redirecting to login...";
-            setTimeout(() => {
-              window.location.href = "/";
-            }, 1200);
-          } else {
-            document.getElementById("message").style.color = "red";
-            document.getElementById("message").textContent = data.message;
-          }
-        } catch (err) {
-          document.getElementById("message").style.color = "red";
-          document.getElementById("message").textContent =
-            "Server error. Please try again.";
-        }
+      pendingUsername = username;
+
+      message.style.color = "green";
+
+      if (data.otp) {
+        message.innerHTML = `
+          OTP:
+          <strong style="color:#e74c3c;font-size:1.2rem">
+            ${data.otp}
+          </strong>
+          <br>
+          <small>Enter this code below</small>
+        `;
+      } else {
+        message.textContent =
+          "OTP sent successfully.";
       }
-    </script>
+
+      document.getElementById("otpSection").style.display =
+        "block";
+
+      document.getElementById("startBtn").disabled = true;
+
+    } catch (error) {
+      console.error(error);
+
+      message.style.color = "red";
+      message.textContent =
+        "Unable to connect to server.";
+    }
+  }
+
+  async function verifyOtp() {
+    const otp = document
+      .getElementById("otpInput")
+      .value
+      .trim();
+
+    const otpError =
+      document.getElementById("otpError");
+
+    const message =
+      document.getElementById("message");
+
+    otpError.textContent = "";
+
+    if (!otp) {
+      otpError.textContent = "OTP required";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "/api/signup/verify",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: JSON.stringify({
+            username: pendingUsername,
+            otp
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(
+        "OTP Verify Response:",
+        data
+      );
+
+      if (!response.ok) {
+        message.style.color = "red";
+        message.textContent =
+          data.message ||
+          "Verification failed";
+        return;
+      }
+
+      message.style.color = "green";
+      message.textContent =
+        "Signup successful! Redirecting...";
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1500);
+
+    } catch (error) {
+      console.error(error);
+
+      message.style.color = "red";
+      message.textContent =
+        "Server error. Please try again.";
+    }
+  }
+</script>
   </body>
 </html>

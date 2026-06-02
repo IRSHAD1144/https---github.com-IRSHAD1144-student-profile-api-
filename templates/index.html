@@ -17,7 +17,7 @@
         letter-spacing: 1px;
       "
     >
-      
+     
     </header>
     <div class="container">
       <h1 style="color: rgb(240, 12, 57)">LOGIN</h1>
@@ -52,72 +52,157 @@
       </form>
     </div>
     <script>
-      async function handleLogin(event) {
-        event.preventDefault();
-        const username = document.getElementById("loginUsername").value.trim();
-        const password = document.getElementById("loginPassword").value.trim();
-        const errorElement = document.getElementById("loginError");
-        errorElement.textContent = "";
+  async function handleLogin(event) {
+    event.preventDefault();
 
-        try {
-          const response = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-          });
-          const data = await response.json();
-          if (response.ok) {
-            if (data.otp_required) {
-            
-              document.getElementById("loginOtpSection").style.display =
-                "block";
-              document.getElementById("loginBtn").disabled = true;
-    
-              window._pendingLoginUser = username;
-              
-              errorElement.style.color = "green";
-              if (data.otp) {
-                errorElement.innerHTML = `OTP : <strong style="font-size: 1.1rem; color: #e74c3c;">${data.otp}</strong><br><small>Enter this code below:</small>`;
-              } else {
-                errorElement.textContent = "OTP sent. Enter it below.";
-              }
-            } else if (data.token) {
-              localStorage.setItem("token", data.token);
-              window.location.href = "/dashboard";
-            }
-          } else {
-            errorElement.textContent = data.message;
-          }
-        } catch (err) {
-          errorElement.textContent = "An error occurred. Please try again.";
-        }
+    const username = document
+      .getElementById("loginUsername")
+      .value
+      .trim();
+
+    const password = document
+      .getElementById("loginPassword")
+      .value
+      .trim();
+
+    const errorElement =
+      document.getElementById("loginError");
+
+    errorElement.textContent = "";
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          password
+        })
+      });
+
+      const data = await response.json();
+
+      console.log("Login Response:", data);
+
+      if (!response.ok) {
+        errorElement.textContent =
+          data.message || "Login failed";
+        return;
       }
 
-      async function verifyLoginOtp() {
-        const otp = document.getElementById("loginOtp").value.trim();
-        const err = document.getElementById("otpError");
-        err.textContent = "";
-        if (!otp) {
-          err.textContent = "OTP required";
-          return;
+      if (data.otp_required) {
+        document.getElementById(
+          "loginOtpSection"
+        ).style.display = "block";
+
+        document.getElementById(
+          "loginBtn"
+        ).disabled = true;
+
+        window._pendingLoginUser = username;
+
+        errorElement.style.color = "green";
+
+        if (data.otp) {
+          errorElement.innerHTML = `
+            OTP:
+            <strong style="color:#e74c3c;font-size:1.1rem">
+              ${data.otp}
+            </strong>
+          `;
+        } else {
+          errorElement.textContent =
+            "OTP sent successfully.";
         }
-        try {
-          const response = await fetch("/api/login/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username: window._pendingLoginUser, otp }),
-          });
-          const data = await response.json();
-          if (response.ok) {
-            localStorage.setItem("token", data.token);
-            window.location.href = "/dashboard";
-          } else {
-            err.textContent = data.message;
-          }
-        } catch (e) {
-          err.textContent = "Server error";
-        }
+
+        return;
       }
-    </script>
+
+      if (data.token) {
+        localStorage.setItem(
+          "token",
+          data.token
+        );
+
+        window.location.href =
+          "/dashboard";
+      }
+
+    } catch (error) {
+      console.error(error);
+
+      errorElement.textContent =
+        "Unable to connect to server.";
+    }
+  }
+
+  async function verifyLoginOtp() {
+    const otp =
+      document
+        .getElementById("loginOtp")
+        .value
+        .trim();
+
+    const err =
+      document.getElementById("otpError");
+
+    err.textContent = "";
+
+    if (!otp) {
+      err.textContent =
+        "Please enter OTP";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "/api/login/verify",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: JSON.stringify({
+            username:
+              window._pendingLoginUser,
+            otp
+          })
+        }
+      );
+
+      const data =
+        await response.json();
+
+      console.log(
+        "OTP Verify Response:",
+        data
+      );
+
+      if (!response.ok) {
+        err.textContent =
+          data.message ||
+          "OTP verification failed";
+        return;
+      }
+
+      localStorage.setItem(
+        "token",
+        data.token
+      );
+
+      window.location.href =
+        "/dashboard";
+
+    } catch (error) {
+      console.error(error);
+
+      err.textContent =
+        "Server error. Please try again.";
+    }
+  }
+</script>
   </body>
 </html>
