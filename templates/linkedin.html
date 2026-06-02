@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedIn</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, "Segoe UI", "Roboto", sans-serif;
+        background: linear-gradient(145deg, #00eaff 0%, #00ff4c 100%);
+        min-block-size: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+      }
+
+      .card {
+        background: rgba(240, 162, 89, 0.85);
+        backdrop-filter: blur(2px);
+        border-radius: 2rem;
+        border: #b1bac4 2px solid;
+        box-shadow:
+          0 25px 45px -12px rgba(144, 61, 61, 0.5),
+          0 0 0 1px rgba(48, 54, 61, 0.5);
+        padding: 2.5rem 2rem;
+        max-inline-size: 560px;
+        inline-size: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #f0f6fc, #8b949e);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-block-end: 0.75rem;
+      }
+
+      .description {
+        color: #b1bac4;
+        background: #0d1117;
+        padding: 0.9rem 1.2rem;
+        border-radius: 1.2rem;
+        font-size: 0.95rem;
+        margin: 1.5rem 0 2rem 0;
+        border-inline-start: 4px solid #3fb950;
+        text-align: start;
+      }
+
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin: 2rem 0 1rem;
+      }
+
+      .btn-login {
+        background: #238636;
+        text-decoration: none;
+        padding: 0.85rem 2rem;
+        font-size: 1.05rem;
+        font-weight: 600;
+        border-radius: 2rem;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        font-family: inherit;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-login:hover {
+        background: #2ea043;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(35, 134, 54, 0.3);
+      }
+
+      .btn-dashboard {
+        background: #21262d;
+        border: 1px solid #30363d;
+        padding: 0.7rem 1.6rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-radius: 2rem;
+        color: #c9d1d9;
+        text-decoration: none;
+        transition: 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-dashboard:hover {
+        background: #30363d;
+        color: #ffffff;
+        border-color: #8b949e;
+      }
+
+      .info-note {
+        font-size: 0.75rem;
+        color: #6e7681;
+        margin-block-start: 2rem;
+        background: #01040950;
+        padding: 0.7rem;
+        border-radius: 1rem;
+      }
+
+      hr {
+        border-color: #30363d;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header
+      style="
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: 1px;
+      "
+    >
+      TeenCodeHub
+    </header>
+    <div class="card">
+      <h1>LinkedIn</h1>
+      <p class="description">Connect with professionals and grow your career</p>
+
+      <div class="btn-group">
+        <a
+          href="https://www.linkedin.com/ "
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-login"
+        >
+          Open LinkedIn
+        </a>
+
+        <a href="/dashboard" class="btn-dashboard"> ← Back to Dashboard </a>
+      </div>
+    </div>
+  </body>
+</html>

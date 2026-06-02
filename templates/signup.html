@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGN UP</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-block-size: 100vh;
+        margin: 0;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        inline-size: 100%;
+        max-inline-size: 400px;
+      }
+      .form-group {
+        margin-block-end: 8px;
+      }
+      input,
+      select {
+        inline-size: 100%;
+        padding: 10px;
+        margin-block-start: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .error {
+        color: red;
+        font-size: 0.85rem;
+        margin-block-start: 5px;
+        min-block-size: 18px;
+      }
+      button {
+        inline-size: 100%;
+        padding: 12px;
+        background-color: rgb(7, 126, 149);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-block-start: 15px;
+      }
+      button:hover {
+        background-color: rgb(5, 98, 116);
+      }
+      .radio-group {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-block-start: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header
+      style="
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #077e95;
+        letter-spacing: 1px;
+      "
+    ></header>
+    <div class="container signup">
+      <h2 style="color: rgb(7, 126, 149); text-align: center">SIGN UP</h2>
+      <form id="signupForm">
+        <div class="form-group">
+          <input type="text" id="username" placeholder="Username" required />
+          <div class="error" id="userError"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required />
+          <div class="error" id="emailError"></div>
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <div class="error" id="passError"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth:</label>
+          <input type="date" id="dateofbirth" required />
+          <div class="error" id="dobError"></div>
+        </div>
+        <div class="form-group">
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Phone (E.164, e.g. +15551234567)"
+          />
+          <div class="error" id="phoneError"></div>
+        </div>
+        <button type="button" id="startBtn" onclick="startSignup()">
+          SEND OTP
+        </button>
+        <div id="otpSection" style="display: none; margin-block-start: 15px">
+          <input type="text" id="otpInput" placeholder="Enter OTP" />
+          <div class="error" id="otpError"></div>
+          <button
+            type="button"
+            onclick="verifyOtp()"
+            style="margin-block-start: 10px"
+          >
+            VERIFY OTP
+          </button>
+        </div>
+        <p style="text-align: center; margin-block-start: 15px">
+          Already have an account? <a href="/">Login</a>
+        </p>
+      </form>
+      <div
+        id="message"
+        style="text-align: center; margin-block-start: 10px"
+      ></div>
+    </div>
+
+    <script>
+      let pendingUsername = null;
+
+      async function startSignup() {
+        document
+          .querySelectorAll(".error")
+          .forEach((el) => (el.textContent = ""));
+        document.getElementById("message").textContent = "";
+
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const dateofbirth = document.getElementById("dateofbirth").value;
+
+        let valid = true;
+
+        if (!username) {
+          document.getElementById("userError").textContent =
+            "Username required";
+          valid = false;
+        }
+        if (!email) {
+          document.getElementById("emailError").textContent = "Email required";
+          valid = false;
+        }
+        if (!password) {
+          document.getElementById("passError").textContent =
+            "Password required";
+          valid = false;
+        }
+        if (!dateofbirth) {
+          document.getElementById("dobError").textContent =
+            "Date of birth required";
+          valid = false;
+        }
+        if (!valid) return;
+
+        try {
+          const phone = document.getElementById("phone").value.trim();
+          const response = await fetch("/api/signup/start", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username,
+              email,
+              password,
+              dateofbirth,
+              phone,
+            }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            pendingUsername = username;
+            document.getElementById("message").style.color = "green";
+            // Show demo OTP if included in response
+            if (data.otp) {
+              document.getElementById("message").innerHTML =
+                `OTP : <strong style="font-size: 1.2rem; color: #e74c3c;">${data.otp}</strong><br><small>Enter this code below:</small>`;
+            } else {
+              document.getElementById("message").textContent =
+                "OTP sent to your email.";
+            }
+            // reveal OTP entry
+            document.getElementById("otpSection").style.display = "block";
+            document.getElementById("startBtn").disabled = true;
+          } else {
+            document.getElementById("message").style.color = "red";
+            document.getElementById("message").textContent = data.message;
+          }
+        } catch (err) {
+          document.getElementById("message").style.color = "red";
+          document.getElementById("message").textContent =
+            "Server error. Please try again.";
+        }
+      }
+
+      async function verifyOtp() {
+        document.getElementById("otpError").textContent = "";
+        const otp = document.getElementById("otpInput").value.trim();
+        if (!otp) {
+          document.getElementById("otpError").textContent = "OTP required";
+          return;
+        }
+        try {
+          const response = await fetch("/api/signup/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: pendingUsername, otp }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            document.getElementById("message").style.color = "green";
+            document.getElementById("message").textContent =
+              "Signup complete! Redirecting to login...";
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 1200);
+          } else {
+            document.getElementById("message").style.color = "red";
+            document.getElementById("message").textContent = data.message;
+          }
+        } catch (err) {
+          document.getElementById("message").style.color = "red";
+          document.getElementById("message").textContent =
+            "Server error. Please try again.";
+        }
+      }
+    </script>
+  </body>
+</html>

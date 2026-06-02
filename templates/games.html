@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title> Logic Games </title>
+    <meta name="description" content="The 10 best logic games for students 15+ years old. Queens puzzle, Sudoku, chess tactics, logic grids, Einstein’s riddle — boost IQ and reasoning skills.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f1f5f9 0%, #e6edf4 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #0a2a38;
+        }
+
+        .container {
+            max-inline-size: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-block-end: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.7rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #0b2b3b, #1b6b5e, #2a8b6a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-block-end: 0.5rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: #1e5f7a;
+            background: rgba(255, 248, 225, 0.9);
+            display: inline-block;
+            padding: 0.3rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+            margin-block-end: 1rem;
+        }
+
+        .hero p {
+            max-inline-size: 720px;
+            margin: 0 auto;
+            color: #2c4c62;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #dfe8f0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 38px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            padding: 1.4rem 1.5rem 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-block-end: 2px solid #eef2f8;
+        }
+
+        .game-rank {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #7f9cbb;
+            background: #eef3fc;
+            inline-size: 50px;
+            block-size: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 40px;
+            font-family: monospace;
+        }
+
+        .game-icon {
+            font-size: 2.3rem;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0e3e4f;
+            line-height: 1.2;
+        }
+
+        .card-content {
+            padding: 1.2rem 1.5rem 1.8rem;
+            flex: 1;
+        }
+
+        .game-description {
+            color: #2c5368;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            margin-block-end: 1.2rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: #e3eff8;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #186b5a;
+            margin-block-end: 1rem;
+            letter-spacing: 0.3px;
+        }
+
+        .game-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1f6e5c;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.65rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            margin-block-start: 0.3rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .game-link:hover {
+            background: #0e5949;
+            gap: 12px;
+            transform: scale(0.97);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-block-start: 2rem;
+            padding: 1.5rem;
+            background: #dce7f0cc;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            color: #1c6079;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-block-start: 0.5rem;
+            background: #1f4b58;
+            color: #f0f6fc;
+            padding: 0.45rem 1.1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+
+        .back-home:hover {
+            background: #0f353f;
+        }
+
+        @media (max-inline-size: 700px) {
+            body {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .game-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header style="text-align:center;padding:1rem 0;font-size:1rem;font-weight:700;color:#0e3e4f;letter-spacing:1px;">TeenCodeHub</header>
+<div class="container">
+    <div class="hero">
+        <h1>LOGIC GAMES</h1>
+        <div class="tagline">Top 10 Brain-Boosting Games for students</div>
+        <a href="/dashboard" class="back-home" style="background:#2b5f6e;">Dashboard</a>
+
+    <div class="games-grid">
+       
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">1</span>
+                <span class="game-icon">♕</span>
+                <h2 class="game-title">Queens Puzzle</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> CONSTRAINT SATISFACTION · STRATEGIC PLACEMENT</div>
+                <div class="game-description">
+                    The classic N‑Queens problem: place queens on a board so none attack each other. 
+                    This version adds colored regions for an extra twist. Demands foresight and systematic elimination — perfect for advanced logical training.
+                </div>
+                <a href="https://queensgame.io/" target="_blank" rel="noopener noreferrer" class="game-link">♛ Play Queens Puzzle →</a>
+            </div>
+        </div>
+
+        
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">2</span>
+                <h2 class="game-title">Sudoku</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> DEDUCTION · PATTERN RECOGNITION</div>
+                <div class="game-description">The world’s most famous logic puzzle. Daily challenges from easy to diabolical train memory, scanning, and logical elimination – essential for any 15+ student.</div>
+                <a href="https://sudoku.com/" target="_blank" rel="noopener noreferrer" class="game-link"> Play Sudoku →</a>
+            </div>
+        </div>
+
+        
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">3</span>
+               
+                <h2 class="game-title">Chess Puzzles</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> FORESIGHT · TACTICAL REASONING</div>
+                <div class="game-description">Thousands of tactical puzzles where you must find winning moves. Builds calculation depth, foresight, and pattern recognition – a favourite for older students.</div>
+                <a href="https://www.chess.com/puzzles" target="_blank" rel="noopener noreferrer" class="game-link"> Solve Tactics →</a>
+            </div>
+        </div>
+
+       
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">4</span>
+                <h2 class="game-title">Logic Grid Puzzles</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> DEDUCTIVE REASONING · ELIMINATION</div>
+                <div class="game-description">Interactive grid puzzles using clues to fill a matrix. From easy to expert, these puzzles force systematic thinking — ideal for students who enjoy detective-style logic.</div>
+                <a href="https://logic.puzzlebaron.com/" target="_blank" rel="noopener noreferrer" class="game-link"> Solve Grids →</a>
+            </div>
+        </div>
+
+       
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">5</span>
+             
+                <h2 class="game-title">Mastermind</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> HYPOTHESIS TESTING · ELIMINATION</div>
+                <div class="game-description">Classic code‑breaking game. Crack the hidden color combination using logical deduction and feedback. Builds hypothesis testing and adaptive reasoning – perfect for 15+.</div>
+                <a href="https://www.webgamesonline.com/mastermind/" target="_blank" rel="noopener noreferrer" class="game-link"> Crack the Code →</a>
+            </div>
+        </div>
+
+        
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">6</span>
+                
+                <h2 class="game-title">Einstein's Riddle</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> COMPLEX GRID LOGIC</div>
+                <div class="game-description">The legendary “Who owns the fish?” puzzle. Uses 15 clues to deduce a full grid. Requires multi‑step reasoning, organization, and patience – a true brain workout for older teens.</div>
+                <a href="https://www.brainzilla.com/logic/einsteins-riddle/" target="_blank" rel="noopener noreferrer" class="game-link"> Solve Riddle →</a>
+            </div>
+        </div>
+
+        
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">7</span>
+                <h2 class="game-title">Nonograms</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge">GRID DEDUCTION · SPATIAL LOGIC</div>
+                <div class="game-description">Reveal hidden pixel art using number clues. Excellent for logical inference, binary thinking, and pattern recognition. Popular among puzzle lovers aged 15+.</div>
+                <a href="https://www.nonograms.org/" target="_blank" rel="noopener noreferrer" class="game-link">Solve Nonograms →</a>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">8</span>
+                <h2 class="game-title">KenKen</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> ARITHMETIC · LOGICAL DEDUCTION</div>
+                <div class="game-description">Math + logic cage puzzle. Combines arithmetic operations with grid logic. Sharper than Sudoku for mental calculation and strategic planning – ideal for older students.</div>
+                <a href="https://www.kenkenpuzzle.com/" target="_blank" rel="noopener noreferrer" class="game-link"> Play KenKen →</a>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">9</span>
+                <h2 class="game-title">Brilliant Logic</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> ALGORITHMIC THINKING · PUZZLES</div>
+                <div class="game-description">Daily logic puzzles, science riddles, and interactive brain teasers. Builds deep reasoning and problem‑solving frameworks. Excellent for college‑bound students.</div>
+                <a href="https://brilliant.org/logic/" target="_blank" rel="noopener noreferrer" class="game-link"> Start →</a>
+            </div>
+        </div>
+
+
+        <div class="game-card">
+            <div class="card-header">
+                <span class="game-rank">10</span>
+                <h2 class="game-title">Logic Quizzes</h2>
+            </div>
+            <div class="card-content">
+                <div class="skill-badge"> INFERENCE · DEDUCTIVE QUIZZES</div>
+                <div class="game-description">Timed logic quizzes and mystery puzzles. These “queves”‑style brain challenges require careful reading and deduction – perfect for competitive older students.</div>
+                <a href="https://www.sporcle.com/games/tags/logic" target="_blank" rel="noopener noreferrer" class="game-link">Take Quiz →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        These games are designed to challenge and develop logical thinking skills for students aged 15 and up. Regular play can enhance problem-solving abilities, pattern recognition, and strategic planning – essential skills for academic success and beyond.
+         <p><strong>© 2026 TeenCodeHub. All rights reserved.</strong></p>
+       <p></p>
+    </div>
+</div>
+</body>
+</html>

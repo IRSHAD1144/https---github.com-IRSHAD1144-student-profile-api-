@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>
+      Top 10 Coding Websites | Professional Colors | For Students 15+
+    </title>
+    <meta
+      name="description"
+      content="The 10 best coding websites for students 15+. Learn programming with free, high-quality resources. Professional design with modern color scheme."
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #6ca1d5;
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          sans-serif;
+        padding: 2rem 1.5rem;
+        color: #1e293b;
+      }
+
+      .container {
+        max-inline-size: 1400px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        text-align: center;
+        margin-block-end: 3rem;
+        padding: 1rem 0;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #0f172a 0%,
+          #1e3a5f 50%,
+          #0f766e 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        letter-spacing: -0.02em;
+        margin-block-end: 0.75rem;
+      }
+
+      .hero .tagline {
+        font-size: 1.1rem;
+        color: #2c3e66;
+        background: #e6f0fa;
+        display: inline-block;
+        padding: 0.35rem 1.5rem;
+        border-radius: 40px;
+        font-weight: 600;
+        margin-block-end: 1rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .hero p {
+        max-inline-size: 720px;
+        margin: 0 auto;
+        color: #2d3a4b;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0 3rem;
+      }
+
+      .card {
+        background: #fbbe06;
+        border-radius: 1.5rem;
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.04),
+          0 1px 2px rgba(0, 0, 0, 0.03);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.25s ease;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e2e8f0;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 28px -12px rgba(0, 0, 0, 0.12);
+        border-color: #cbd5e1;
+      }
+
+      .card-header {
+        padding: 1.4rem 1.5rem 0.8rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-block-end: 1px solid #eef2f6;
+      }
+
+      .card-rank {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #4b6b8f;
+        background: #eef3fa;
+        inline-size: 48px;
+        block-size: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        font-family: monospace;
+      }
+
+      .card-icon {
+        font-size: 2.1rem;
+      }
+
+      .card-title {
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: #0f2b3d;
+        line-height: 1.2;
+        letter-spacing: -0.2px;
+      }
+
+      .card-content {
+        padding: 1rem 1.5rem 1.6rem;
+        flex: 1;
+      }
+
+      .skill-badge {
+        display: inline-block;
+        background: #e1ecf4;
+        padding: 0.2rem 0.8rem;
+        border-radius: 30px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #1f6e5c;
+        margin-block-end: 0.9rem;
+        letter-spacing: 0.2px;
+      }
+
+      .description {
+        color: #2d3e50;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        margin-block-end: 1.2rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #1e4a6b;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.6rem 1.3rem;
+        border-radius: 40px;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+        margin-block-start: 0.2rem;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: #0f3c57;
+        gap: 12px;
+        transform: scale(0.97);
+      }
+
+      .footer-note {
+        text-align: center;
+        margin-block-start: 2rem;
+        padding: 1.5rem;
+        background: #eef2f6;
+        border-radius: 1.5rem;
+        font-size: 0.85rem;
+        color: #2c5a6e;
+        border: 1px solid #dce5ec;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-block-start: 0.5rem;
+        background: #1f3e48;
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: 0.2s;
+      }
+
+      .back-link:hover {
+        background: #0e2d36;
+      }
+
+      @media (max-inline-size: 700px) {
+        body {
+          padding: 1rem;
+        }
+        .hero h1 {
+          font-size: 1.9rem;
+        }
+        .card-title {
+          font-size: 1.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header
+      style="
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #0f2b3b;
+        letter-spacing: 1px;
+      "
+    >
+     
+    </header>
+    <div class="container">
+      <div class="hero">
+        <h1> TeenCodeHub</h1>
+        <h1>CODING WEBSITES</h1>
+        <div class="tagline">PROFESSIONAL LEARNING PLATFORMS</div>
+        <p>
+          Curated list of the best coding resources: from interactive tutorials
+          and algorithms to full‑stack courses. Boost your programming career
+          with industry‑recognized platforms.
+        </p>
+        <a href="/dashboard" class="back-link" style="background: #2b5f6e"
+          >Dashboard</a
+        >
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">1</span>
+
+            <h2 class="card-title">freeCodeCamp</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">FULL‑STACK · CERTIFICATIONS</div>
+            <div class="description">
+              Completely free, open‑source curriculum. Build real projects, earn
+              verified certifications in web dev, Python, and machine learning.
+              Ideal for portfolio building.
+            </div>
+            <a
+              href="https://www.freecodecamp.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+            >
+              Start Coding →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">2</span>
+
+            <h2 class="card-title">Codecademy</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">PYTHON · JAVASCRIPT · WEB</div>
+            <div class="description">
+              Interactive lessons with real‑time code execution. Structured
+              career paths and skill tracks for beginners to intermediate
+              learners.
+            </div>
+            <a
+              href="https://www.codecademy.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              >Learn to Code →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">3</span>
+
+            <h2 class="card-title">LeetCode</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">ALGORITHMS · INTERVIEW PREP</div>
+            <div class="description">
+              Master coding interviews with thousands of problems, weekly
+              contests, and data structure challenges. Essential for competitive
+              programming.
+            </div>
+            <a
+              href="https://leetcode.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+            >
+              Solve Challenges →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">4</span>
+
+            <h2 class="card-title">The Odin Project</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">FULL‑STACK JAVASCRIPT</div>
+            <div class="description">
+              Free, open‑source curriculum that takes you from zero to
+              job‑ready. Build real projects and collaborate like a professional
+              developer.
+            </div>
+            <a
+              href="https://www.theodinproject.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+            >
+              Become a Dev →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">5</span>
+
+            <h2 class="card-title">Coursera</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">UNIVERSITY LEVEL · PYTHON · AI</div>
+            <div class="description">
+              Courses from Stanford, MIT, and Google. Earn professional
+              certificates and even degrees. Academic approach to CS.
+            </div>
+            <a
+              href="https://www.coursera.org/browse/computer-science"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              >Start Learning →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">6</span>
+
+            <h2 class="card-title">HackerRank</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">CODING CHALLENGES · SQL</div>
+            <div class="description">
+              Gamified coding platform with leaderboards. Practice algorithms,
+              data structures, and SQL. Great for interview preparation.
+            </div>
+            <a
+              href="https://www.hackerrank.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              >Code & Compete →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">7</span>
+            <h2 class="card-title">W3Schools</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">HTML · CSS · JS · SQL</div>
+            <div class="description">
+              Free, beginner‑friendly tutorials with “Try it Yourself” editors.
+              Perfect for quick reference and learning web basics.
+            </div>
+            <a
+              href="https://www.w3schools.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              >Explore Tutorials →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">8</span>
+
+            <h2 class="card-title">Codeforces</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">COMPETITIVE PROGRAMMING</div>
+            <div class="description">
+              High‑intensity contests and algorithmic challenges. Improve speed,
+              accuracy, and problem‑solving under pressure. For advanced coders.
+            </div>
+            <a
+              href="https://codeforces.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              >Join Contests →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">9</span>
+
+            <h2 class="card-title">MIT OCW</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">CS · ALGORITHMS · PYTHON</div>
+            <div class="description">
+              Free access to actual MIT course materials: video lectures,
+              assignments, exams. Introduction to Computer Science with Python.
+            </div>
+            <a
+              href="https://ocw.mit.edu/search/?q=computer%20science"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+              >MIT Courses →</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-rank">10</span>
+
+            <h2 class="card-title">edX</h2>
+          </div>
+          <div class="card-content">
+            <div class="skill-badge">CS50 · HARVARD · MICROSOFT</div>
+            <div class="description">
+              High‑quality courses from Harvard, MIT, and Microsoft. Famous CS50
+              is perfect for beginners. Earn verified certificates.
+            </div>
+            <a
+              href="https://www.edx.org/learn/computer-science"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn"
+            >
+              Start edX →</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        These platforms are the best for learning programming in 2026. Whether
+        you're a beginner or looking to level up, these resources will help you
+        achieve your coding goals. Happy coding!
+        <p><strong>© 2026 TeenCodeHub. All rights reserved.</strong></p>
+      </div>
+    </div>
+  </body>
+</html>

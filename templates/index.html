@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header
+      style="
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #f02b57;
+        letter-spacing: 1px;
+      "
+    >
+      
+    </header>
+    <div class="container">
+      <h1 style="color: rgb(240, 12, 57)">LOGIN</h1>
+      <form id="loginForm" onsubmit="return handleLogin(event);">
+        <input type="text" id="loginUsername" placeholder="Username" required />
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Password"
+          required
+        />
+        <p id="loginError" style="color: red"></p>
+        <button type="submit" id="loginBtn">Login</button>
+        <div
+          id="loginOtpSection"
+          style="display: none; margin-block-start: 12px"
+        >
+          <input type="text" id="loginOtp" placeholder="Enter OTP" />
+          <p id="otpError" style="color: red; font-size: 0.9rem"></p>
+          <button
+            type="button"
+            onclick="verifyLoginOtp()"
+            style="margin-block-start: 8px"
+          >
+            Verify OTP
+          </button>
+        </div>
+        <p>
+          NEW USER?
+          <a href="/signup" style="color: rgb(240, 12, 57)">SIGN UP</a>
+        </p>
+      </form>
+    </div>
+    <script>
+      async function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById("loginUsername").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const errorElement = document.getElementById("loginError");
+        errorElement.textContent = "";
+
+        try {
+          const response = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            if (data.otp_required) {
+              // show OTP input
+              document.getElementById("loginOtpSection").style.display =
+                "block";
+              document.getElementById("loginBtn").disabled = true;
+              // store pending username
+              window._pendingLoginUser = username;
+              // for demo show OTP code if included
+              errorElement.style.color = "green";
+              if (data.otp) {
+                errorElement.innerHTML = `OTP : <strong style="font-size: 1.1rem; color: #e74c3c;">${data.otp}</strong><br><small>Enter this code below:</small>`;
+              } else {
+                errorElement.textContent = "OTP sent. Enter it below.";
+              }
+            } else if (data.token) {
+              localStorage.setItem("token", data.token);
+              window.location.href = "/dashboard";
+            }
+          } else {
+            errorElement.textContent = data.message;
+          }
+        } catch (err) {
+          errorElement.textContent = "An error occurred. Please try again.";
+        }
+      }
+
+      async function verifyLoginOtp() {
+        const otp = document.getElementById("loginOtp").value.trim();
+        const err = document.getElementById("otpError");
+        err.textContent = "";
+        if (!otp) {
+          err.textContent = "OTP required";
+          return;
+        }
+        try {
+          const response = await fetch("/api/login/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: window._pendingLoginUser, otp }),
+          });
+          const data = await response.json();
+          if (response.ok) {
+            localStorage.setItem("token", data.token);
+            window.location.href = "/dashboard";
+          } else {
+            err.textContent = data.message;
+          }
+        } catch (e) {
+          err.textContent = "Server error";
+        }
+      }
+    </script>
+  </body>
+</html>

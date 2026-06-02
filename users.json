@@ -1,0 +1,55 @@
+{
+    "IRA": {
+        "password": "scrypt:32768:8:1$CWa5Crr9jOALYXkc$fcc6c6c4ae5194db4ef441a82f95f2da957d3bb1b225964c1255f829ced9e011a1557ceeb4afc43ce4a30a47a65482adc96b9877768781fc1bca757d0fbaa766",
+        "email": "vu.241fao4d15@gmail.com",
+        "gender": "male",
+        "dateofbirth": "2007-07-08"
+    },
+    "irva": {
+        "password": "scrypt:32768:8:1$ZQ6JNrqvpZ4dMMR3$79c9425d5adf7434c9f18ed9577ffd0a2887d992485a6a467f369c686683fe3bd31da7fb35c7e2046ba0d63da735bd03006abfe193fb16141b656041043cacff",
+        "email": "123@gmai.com",
+        "gender": "male",
+        "dateofbirth": "2006-09-05",
+        "registered_at": "2026-05-25T10:43:52.523538+00:00"
+    },
+    "john_doe": {
+        "password": "scrypt:32768:8:1$sxBW1hjIORj1rqTI$e3ae5bcc0c59b5029d3a66f00068e2f8879652ae7b4f151904524242ded2a0fe08f6aeb6dbc779b0dd6ce7d357c0067e2d7ff4ff4ca9bf31e394a53e5d90dcf9",
+        "email": "john@example.com",
+        "dateofbirth": "1995-05-15",
+        "registered_at": "2026-06-01T05:12:09.607871+00:00"
+    },
+    "testuser": {
+        "password": "scrypt:32768:8:1$VE7UhqMnsb19oUiG$f10f7007100ef2248f5cb897bf42975946e26d87289af3b3434de4b6204a9dcee6033f53dad111ff4259e57f9913368c60e07c9c1b8001bb9f1b88d4fb9ff54b",
+        "email": "test@example.com",
+        "dateofbirth": "1990-01-01",
+        "registered_at": "2026-06-01T05:22:07.291001+00:00"
+    },
+    "twtest": {
+        "password": "scrypt:32768:8:1$zF8pQzWhXH8BSzIS$eaa85e56c14c63fbfd042d384853e054493cb44261b97a89e98b57d16acea42b26dddf30cec914e4d99e82c79eb2b7ffd47609728a68dff10ac21993f4a49ebf",
+        "email": "tw@example.com",
+        "dateofbirth": "1990-01-01",
+        "phone": "+15551234567",
+        "registered_at": "2026-06-01T05:25:36.748794+00:00"
+    },
+    "demouser": {
+        "password": "scrypt:32768:8:1$mBPavn16IZ5nduO2$241164b4ef03e3c443c3d531d825de40e050e269f08ad8a0e99a6827722438eb04a6eb7e1abe6803a2187ce4d1d05fc44fe9843b538cd6535032a38fc8601006",
+        "email": "demo2@example.com",
+        "dateofbirth": "1990-01-01",
+        "phone": null,
+        "registered_at": "2026-06-01T05:30:00.667603+00:00"
+    },
+    "emailtest": {
+        "password": "scrypt:32768:8:1$B7S7ZHkyINJfyptx$a3d97a1a02187580a6e88eb3f6d6686814aff8e0758a970bdee98a0ebede85e9f2c57a03e838fd376f8ae2d9ce1d8934c5a6a171bf9eabd486b892cba86138f6",
+        "email": "emailtest@example.com",
+        "dateofbirth": "1990-01-01",
+        "phone": null,
+        "registered_at": "2026-06-01T05:32:35.908182+00:00"
+    },
+    "123": {
+        "password": "scrypt:32768:8:1$7WYhPXEK1JIJhSgb$f55ba9d1e8382b6bb5b8a689fdb7d9b0d46a9d2be663322ff185d4325b008c22d02324785dc85e817d6c23f216e62cc041ce390ea99cf7029b1a5a4dedb5a2cc",
+        "email": "irsadshaik2007@gmail.com",
+        "dateofbirth": "2007-07-08",
+        "phone": "9346783447",
+        "registered_at": "2026-06-01T05:44:59.343996+00:00"
+    }
+}
