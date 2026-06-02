@@ -4,7 +4,6 @@ import jwt
 import datetime
 import json
 import os
-import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 import logging
@@ -42,84 +41,53 @@ app = Flask(__name__)
 CORS(app)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or secrets.token_hex(32)
-USER_DB_FILE = os.environ.get('USER_DB_FILE', 'users.db')
+USER_DATA_FILE = os.environ.get('USER_DATA_FILE', 'users.json')
 
 
 pending_signups = {}
 pending_logins = {}
 
 
-def get_db_connection():
-    conn = sqlite3.connect(USER_DB_FILE, detect_types=sqlite3.PARSE_DECLTYPES)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-
-def init_db():
-    conn = get_db_connection()
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS users (
-            username TEXT PRIMARY KEY,
-            password TEXT NOT NULL,
-            email TEXT NOT NULL,
-            dateofbirth TEXT NOT NULL,
-            phone TEXT,
-            registered_at TEXT NOT NULL
-        )
-        """
-    )
-    conn.commit()
-    conn.close()
-
-
 def load_users():
-    conn = get_db_connection()
-    rows = conn.execute(
-        "SELECT username, password, email, dateofbirth, phone, registered_at FROM users"
-    ).fetchall()
-    conn.close()
-    return {
-        row["username"]: {
-            "password": row["password"],
-            "email": row["email"],
-            "dateofbirth": row["dateofbirth"],
-            "phone": row["phone"],
-            "registered_at": row["registered_at"]
-        }
-        for row in rows
-    }
+    if not os.path.exists(USER_DATA_FILE):
+        return {}
+
+    try:
+        with open(USER_DATA_FILE, 'r', encoding='utf-8') as file:
+            users = json.load(file)
+    except (json.JSONDecodeError, OSError):
+        logging.exception('Failed to load users JSON file')
+        return {}
+
+    return users if isinstance(users, dict) else {}
 
 
 def save_user(username, password, email, dateofbirth, phone, registered_at):
-    conn = get_db_connection()
-    conn.execute(
-        "INSERT OR REPLACE INTO users (username, password, email, dateofbirth, phone, registered_at) VALUES (?, ?, ?, ?, ?, ?)",
-        (username, password, email, dateofbirth, phone, registered_at),
-    )
-    conn.commit()
-    conn.close()
+    users = load_users()
+    users[username] = {
+        'password': password,
+        'email': email,
+        'dateofbirth': dateofbirth,
+        'phone': phone,
+        'registered_at': registered_at
+    }
+
+    with open(USER_DATA_FILE, 'w', encoding='utf-8') as file:
+        json.dump(users, file, indent=4)
 
 
 def get_all_users():
-    conn = get_db_connection()
-    rows = conn.execute(
-        "SELECT username, email, dateofbirth, phone, registered_at FROM users"
-    ).fetchall()
-    conn.close()
+    users = load_users()
     return [
         {
-            "username": row["username"],
-            "email": row["email"],
-            "dateofbirth": row["dateofbirth"],
-            "phone": row["phone"],
-            "registered_at": row["registered_at"]
+            "username": username,
+            "email": user.get("email"),
+            "dateofbirth": user.get("dateofbirth"),
+            "phone": user.get("phone"),
+            "registered_at": user.get("registered_at")
         }
-        for row in rows
+        for username, user in users.items()
     ]
-
-
-init_db()
 
 
 def send_otp_via_twilio(phone, otp):

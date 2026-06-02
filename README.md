@@ -4,12 +4,13 @@ A clean, secure user authentication system built with Flask featuring JWT-based 
 
 ## Features
 
-✅ **User Registration** - Create new user accounts with email validation  
-✅ **Secure Login** - Password hashing with Werkzeug security  
-✅ **JWT Authentication** - Stateless session management with 30-minute token expiry  
-✅ **Protected Routes** - Dashboard and profile only accessible to authenticated users  
-✅ **Responsive Design** - Modern UI built with HTML5 and CSS  
-✅ **CORS Support** - Enabled for cross-origin requests
+ **User Registration** - Create new user accounts with email validation  
+ **Secure Login** - Password hashing with Werkzeug security  
+ **JWT Authentication** - Stateless session management with 30-minute token expiry  
+ **Protected Routes** - Dashboard and profile only accessible to authenticated users  
+ **Responsive Design** - Modern UI built with HTML5 and CSS  
+
+ **CORS Support** - Enabled for cross-origin requests
 
 ## Project Structure
 
@@ -182,11 +183,11 @@ The API returns appropriate HTTP status codes:
 
 ## Security Features
 
-🔒 **Password Hashing** - Uses Werkzeug's secure hashing  
-🔒 **JWT Tokens** - Stateless authentication with expiration  
-🔒 **CORS** - Cross-Origin Resource Sharing enabled  
-🔒 **Input Validation** - Server-side validation of all inputs  
-🔒 **UTF-8 Encoding** - Safe file handling
+ **Password Hashing** - Uses Werkzeug's secure hashing  
+ **JWT Tokens** - Stateless authentication with expiration  
+ **CORS** - Cross-Origin Resource Sharing enabled  
+ **Input Validation** - Server-side validation of all inputs  
+ **UTF-8 Encoding** - Safe file handling
 
 ## Configuration
 

@@ -68,13 +68,13 @@
           const data = await response.json();
           if (response.ok) {
             if (data.otp_required) {
-              // show OTP input
+            
               document.getElementById("loginOtpSection").style.display =
                 "block";
               document.getElementById("loginBtn").disabled = true;
-              // store pending username
+    
               window._pendingLoginUser = username;
-              // for demo show OTP code if included
+              
               errorElement.style.color = "green";
               if (data.otp) {
                 errorElement.innerHTML = `OTP : <strong style="font-size: 1.1rem; color: #e74c3c;">${data.otp}</strong><br><small>Enter this code below:</small>`;

@@ -1,0 +1,9 @@
+.env
+.git/
+.vercel/
+223344/
+__pycache__/
+*.py[cod]
+users.db
+users.json
+CODE_REVIEW.md

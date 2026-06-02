@@ -185,7 +185,7 @@
           if (response.ok) {
             pendingUsername = username;
             document.getElementById("message").style.color = "green";
-            // Show demo OTP if included in response
+           
             if (data.otp) {
               document.getElementById("message").innerHTML =
                 `OTP : <strong style="font-size: 1.2rem; color: #e74c3c;">${data.otp}</strong><br><small>Enter this code below:</small>`;
@@ -193,7 +193,7 @@
               document.getElementById("message").textContent =
                 "OTP sent to your email.";
             }
-            // reveal OTP entry
+           
             document.getElementById("otpSection").style.display = "block";
             document.getElementById("startBtn").disabled = true;
           } else {
