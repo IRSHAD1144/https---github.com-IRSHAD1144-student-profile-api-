@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Books Library</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        body {
+            background: radial-gradient(circle at top right, #2a0845, #6441A5);
+            min-block-size: 100vh;
+            color: #fff;
+            padding: 2rem 1.5rem;
+        }
+        .container { max-inline-size: 1400px; margin: 0 auto; }
+        .hero { text-align: center; margin-block-end: 4rem; padding-block-start: 2rem; animation: fadeIn 1s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-block-end: 1rem; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: #d8b4fe;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-block-end: 1.5rem;
+        }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2.5rem; }
+        .book-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .book-card::before {
+            content: ''; position: absolute; inset-block-start: 0; inset-inline-start: 0; inline-size: 100%; block-size: 5px;
+            background: linear-gradient(90deg, #f59e0b, #ec4899);
+            transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+        }
+        .book-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: rgba(255, 255, 255, 0.3); }
+        .book-card:hover::before { transform: scaleX(1); }
+        .rank {
+            position: absolute; inset-block-start: -15px; inset-inline-end: 20px; font-size: 4rem; font-weight: 900;
+            color: rgba(255, 255, 255, 0.05); line-height: 1; z-index: -1;
+        }
+        .title { font-size: 1.6rem; font-weight: 700; margin-block-end: 0.5rem; color: #f8fafc; }
+        .author { font-size: 1rem; color: #cbd5e1; font-style: italic; margin-block-end: 1.5rem; }
+        .badge {
+            display: inline-block; padding: 0.3rem 1rem; background: rgba(236, 72, 153, 0.2);
+            color: #fbcfe8; border-radius: 30px; font-size: 0.75rem; font-weight: 700; margin-block-end: 1.5rem;
+            letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(236, 72, 153, 0.3);
+            align-self: flex-start;
+        }
+        .desc { color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; margin-block-end: 2rem; flex: 1; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; inline-size: 100%;
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); color: white;
+            padding: 0.8rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; border: none; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+            margin-block-start: auto;
+        }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 8px 25px rgba(236, 72, 153, 0.5); }
+        .back-link {
+            display: inline-block; background: rgba(255,255,255,0.1); color: white;
+            padding: 0.7rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600;
+            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
+        }
+        .back-link:hover { background: rgba(255,255,255,0.2); }
+        
+        @media (max-inline-size: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .books-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>Top 10 Coding Books</h1>
+            <div class="tagline">The Ultimate Library for Aspiring Developers</div>
+            <p style="color: #cbd5e1; max-inline-size: 600px; margin: 0 auto 2rem; line-height: 1.6;">
+                Master algorithms, write cleaner code, and think like a professional software engineer with these must-read classics.
+            </p>
+            <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+        </div>
+
+        <div class="books-grid">
+            <!-- Book 1 -->
+            <div class="book-card">
+                <div class="rank">1</div>
+                <div class="badge">Architecture & Best Practices</div>
+                <h2 class="title">Clean Code</h2>
+                <div class="author">by Robert C. Martin</div>
+                <div class="desc">The undisputed bible for writing readable, maintainable, and robust code. It teaches you how to turn bad code into good code through formatting, naming conventions, and structure.</div>
+                <a href="https://www.goodreads.com/book/show/3735293-clean-code" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="book-card">
+                <div class="rank">2</div>
+                <div class="badge">Algorithms & Data Structures</div>
+                <h2 class="title">Grokking Algorithms</h2>
+                <div class="author">by Aditya Bhargava</div>
+                <div class="desc">A highly visual and easy-to-understand guide to algorithms. Perfect for beginners who find traditional computer science textbooks dry and overly mathematical.</div>
+                <a href="https://www.goodreads.com/book/show/28008166-grokking-algorithms" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="book-card">
+                <div class="rank">3</div>
+                <div class="badge">Career & Mindset</div>
+                <h2 class="title">The Pragmatic Programmer</h2>
+                <div class="author">by Andrew Hunt & David Thomas</div>
+                <div class="desc">Packed with practical advice on software development, debugging, and career growth. It teaches you the mindset needed to become a highly effective developer.</div>
+                <a href="https://www.goodreads.com/book/show/4099.The_Pragmatic_Programmer" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="book-card">
+                <div class="rank">4</div>
+                <div class="badge">JavaScript Mastery</div>
+                <h2 class="title">Eloquent JavaScript</h2>
+                <div class="author">by Marijn Haverbeke</div>
+                <div class="desc">A deep dive into JavaScript that takes you from basics to advanced concepts like functional programming and asynchronous execution. Completely free to read online.</div>
+                <a href="https://eloquentjavascript.net/" target="_blank" class="btn">Read Free Online</a>
+            </div>
+
+            <!-- Book 5 -->
+            <div class="book-card">
+                <div class="rank">5</div>
+                <div class="badge">Interview Preparation</div>
+                <h2 class="title">Cracking the Coding Interview</h2>
+                <div class="author">by Gayle Laakmann McDowell</div>
+                <div class="desc">The gold standard for preparing for software engineering interviews at top tech companies. Contains 189 programming questions and detailed solutions.</div>
+                <a href="https://www.goodreads.com/book/show/30833215-cracking-the-coding-interview" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+
+            <!-- Book 6 -->
+            <div class="book-card">
+                <div class="rank">6</div>
+                <div class="badge">Problem Solving</div>
+                <h2 class="title">Think Like a Programmer</h2>
+                <div class="author">by V. Anton Spraul</div>
+                <div class="desc">Instead of just teaching syntax, this book focuses on the cognitive aspects of programming—how to approach and break down complex logic problems.</div>
+                <a href="https://www.goodreads.com/book/show/13524600-think-like-a-programmer" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+
+            <!-- Book 7 -->
+            <div class="book-card">
+                <div class="rank">7</div>
+                <div class="badge">Software Design</div>
+                <h2 class="title">Head First Design Patterns</h2>
+                <div class="author">by Eric Freeman</div>
+                <div class="desc">A brain-friendly guide to object-oriented design patterns. It uses visual formats, puzzles, and engaging examples to explain complex architectural concepts.</div>
+                <a href="https://www.goodreads.com/book/show/58128.Head_First_Design_Patterns" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+
+            <!-- Book 8 -->
+            <div class="book-card">
+                <div class="rank">8</div>
+                <div class="badge">Deep JS Mechanics</div>
+                <h2 class="title">You Don't Know JS Yet</h2>
+                <div class="author">by Kyle Simpson</div>
+                <div class="desc">A phenomenal series of books that explores the hidden and complex mechanics of JavaScript. It separates the beginners from the true masters of the language.</div>
+                <a href="https://github.com/getify/You-Dont-Know-JS" target="_blank" class="btn">Read on GitHub</a>
+            </div>
+
+            <!-- Book 9 -->
+            <div class="book-card">
+                <div class="rank">9</div>
+                <div class="badge">Computer Science</div>
+                <h2 class="title">Introduction to Algorithms</h2>
+                <div class="author">by Thomas H. Cormen (CLRS)</div>
+                <div class="desc">The most comprehensive textbook on algorithms. While heavy on math, it is universally considered the definitive reference for serious computer science students.</div>
+                <a href="https://www.goodreads.com/book/show/108986.Introduction_to_Algorithms" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+
+            <!-- Book 10 -->
+            <div class="book-card">
+                <div class="rank">10</div>
+                <div class="badge">System Architecture</div>
+                <h2 class="title">Designing Data-Intensive Apps</h2>
+                <div class="author">by Martin Kleppmann</div>
+                <div class="desc">For intermediate to advanced coders, this book is essential for understanding how to build scalable, reliable, and maintainable large-scale software systems.</div>
+                <a href="https://www.goodreads.com/book/show/23463279-designing-data-intensive-applications" target="_blank" class="btn">View on Goodreads</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

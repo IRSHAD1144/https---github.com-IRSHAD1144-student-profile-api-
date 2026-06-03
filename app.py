@@ -177,6 +177,10 @@ def education_page():
 def games_page():
     return render_template("games.html")
 
+@app.route("/books")
+def books_page():
+    return render_template("books.html")
+
 @app.route("/github")
 def github_page():
     return render_template("github.html")

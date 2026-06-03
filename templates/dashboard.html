@@ -207,6 +207,24 @@
 
           <div
             class="dashboard-card"
+            onclick="window.location.href = '/books'"
+          >
+            <h3>Coding Books</h3>
+            <p>Top books to improve your coding skills</p>
+            <button
+              class="btn-dashboard"
+              style="margin-block-start: 10px"
+              onclick="
+                event.stopPropagation();
+                window.location.href = '/books';
+              "
+            >
+              Book Library
+            </button>
+          </div>
+
+          <div
+            class="dashboard-card"
             onclick="window.location.href = '/github'"
           >
             <h3>GitHub</h3>
