@@ -11,9 +11,12 @@ import logging
 try:
     from dotenv import load_dotenv
     load_dotenv()
+    
 except ImportError:
     pass
 
+print("Current folder:", os.getcwd())
+print("MONGO_URI =", os.environ.get("MONGO_URI"))
 
 TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
