@@ -263,7 +263,7 @@ def login_verify():
     if not pending:
         return jsonify({'message': 'No pending login found'}), 404
 
-    if datetime.datetime.now(datetime.timezone.utc) > pending['expires_at']:
+    if datetime.datetime.now(datetime.timezone.utc) > pending['expires_at'].replace(tzinfo=datetime.timezone.utc):
         pending_logins_col.delete_one({"username": username})
         return jsonify({'message': 'OTP expired'}), 400
 
@@ -361,7 +361,7 @@ def signup_verify():
         return jsonify({'message': 'No pending signup found'}), 404
 
    
-    if datetime.datetime.now(datetime.timezone.utc) > pending['expires_at']:
+    if datetime.datetime.now(datetime.timezone.utc) > pending['expires_at'].replace(tzinfo=datetime.timezone.utc):
         pending_signups_col.delete_one({"username": username})
         return jsonify({'message': 'OTP expired'}), 400
 
